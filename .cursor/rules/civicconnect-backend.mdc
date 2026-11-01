@@ -1,0 +1,47 @@
+---
+description: CivicConnect AI backend — MVC, auth, security, APIs
+globs: server/**/*
+alwaysApply: false
+---
+
+# Backend Conventions
+
+## Architecture
+
+MVC: `routes/` → `controllers/` → `models/` + `services/`
+
+## Key Services
+
+- `aiClient.js` — FastAPI at `AI_SERVICE_URL` with graceful fallback
+- `notificationService.js` — Socket.IO broadcasts
+- Cloudinary via `config/cloudinary.js`
+
+## Auth Model
+
+- Citizens: `optionalProtect` — anonymous reporting allowed
+- Admin/Officer: `protect` + `authorize('admin'|'officer')`
+
+## Security
+
+Helmet, CORS, rate limiting, input sanitization/validation, JWT + refresh for admin, env secrets never committed, secure Cloudinary uploads (type/size limits via Multer).
+
+## Extending Issue Model
+
+Add fields incrementally (`aiSummary`, `complaintId`, `resolutionNotes`, `beforeImage`, `afterImage`). Never break existing schema fields.
+
+## API Patterns
+
+```javascript
+// ✅ Extend existing controller
+export const createIssue = async (req, res) => {
+  // preserve existing flow, add new fields at save time
+};
+
+// ❌ Don't create parallel endpoints for same resource
+```
+
+Validate request bodies; return consistent `{ success, data, message }` shapes. Sanitize user-generated content before save.
+
+## Environment
+
+`PORT`, `MONGO_URI`, `JWT_SECRET`, `AI_SERVICE_URL`, `CLOUDINARY_*`, `OPENROUTER_API_KEY`, `GOOGLE_MAPS_API_KEY`

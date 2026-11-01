@@ -1,0 +1,57 @@
+---
+description: CivicConnect AI feature requirements and UX patterns
+globs: client/**/*,server/**/*
+alwaysApply: false
+---
+
+# Feature Requirements
+
+## Community Feed (default landing)
+
+Infinite scroll + skeleton loading; pagination fallback. Real-time updates via Socket.IO — feed should feel alive.
+
+**Report card (top):** "What's happening in your community?" — Upload Photo, Capture Camera, Current Location, Select Category, CTA "Report Civic Issue". No citizen registration/login.
+
+**Issue posts:** avatar, report text, location, timestamp, image, title, description, AI summary, category, severity, priority, assigned department, AI confidence, support count, comments, share, bookmark, status timeline, before/after resolution.
+
+## Support System
+
+"Support Issue" (not likes). Animated button, duplicate prevention, anonymous browser tracking, community impact calculation.
+
+## Comments
+
+Threaded replies, newest/popular sorting, useful community discussion.
+
+## AI Section
+
+**Citizen UI:** "Analyzed by CivicConnect AI" — classification, confidence, severity, priority, recommended department, nearby similar reports.
+
+**Admin UI:** full diagnostics, duplicate detection, fake report flags.
+
+## Status Timeline
+
+Reported → AI Verified → Assigned → In Progress → Resolved. Current stage highlighted, animated transitions.
+
+## Resolution Story
+
+Before/after images, department, engineer, resolution notes, date, time taken.
+
+## Right Sidebar
+
+Trending issues, critical issues, nearby issues, recent resolutions, community statistics, AI insights.
+
+## Map
+
+Interactive Google Maps/Leaflet — issue pins, cluster markers, filters, nearby search, navigation.
+
+## Filters & Search
+
+Category, priority, status, department, location, date; sort by most supported, newest, nearest, trending. Instant debounced search with keyword highlighting.
+
+## Admin Dashboard
+
+JWT auth, analytics, issue queue, AI review, department assignment, status updates, resolution upload, performance dashboard.
+
+## Real-Time (Socket.IO)
+
+Status updates, support counts, comments, notifications, live admin changes.

@@ -1,0 +1,55 @@
+---
+description: CivicConnect AI design system — colors, typography, UI patterns
+globs: client/**/*
+alwaysApply: false
+---
+
+# Design System
+
+## Philosophy
+
+Premium, modern, minimal, professional, government-ready, accessible, responsive, high-performance. Communicate trust immediately.
+
+Avoid flashy gradients, unnecessary glassmorphism, and clutter. Every spacing, animation, and color must have purpose.
+
+## Colors
+
+| Token | Value | Use |
+|-------|-------|-----|
+| Primary | `#2563EB` | CTAs, links, active states |
+| Success | `#16A34A` | Resolved, verified |
+| Warning | `#F59E0B` | Pending, medium priority |
+| Critical | `#DC2626` | Emergency, urgent |
+| Background | `#F8FAFC` | Page background (light) |
+| Cards | `#FFFFFF` | Card surfaces |
+| Dark bg | `#0F172A` | Dark mode background |
+
+## Typography
+
+- Font: **Inter** (`@fontsource/inter`)
+- Responsive sizes, consistent spacing (`p-4`, `p-6`, `gap-4`, `space-y-4`)
+- Hierarchy: `text-xs` labels → `text-sm` body → `text-lg/xl` headings
+
+## Layout
+
+**Desktop:** left nav + center feed + right insights
+**Mobile:** single feed + bottom nav + floating report button
+**Theme:** light default; dark via `data-theme="dark"` on `<html>`
+
+## Shared Components (`client/src/components/ui/`)
+
+`Button`, `Card`, `Badge`, `Skeleton`, `Avatar` — extend here before creating one-offs.
+
+## Left Nav Items
+
+Logo, Home, Community Feed, Report Issue, Civic Map, Track Complaint, AI Intelligence, Notifications, Help, Admin
+
+## Avoid
+
+```jsx
+// ❌ Gradient CTAs, glassmorphism, glow shadows
+className="bg-gradient-to-r from-teal-500 backdrop-blur-md shadow-teal-500/25"
+
+// ✅ Clean, purposeful
+className="bg-primary-600 hover:bg-primary-700 text-white rounded-xl"
+```

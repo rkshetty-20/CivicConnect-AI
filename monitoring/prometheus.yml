@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'civicconnect_server'
+    static_configs:
+      - targets: ['server:5000']
+    metrics_path: /metrics
+    scheme: http
+
+  - job_name: 'civicconnect_ai_service'
+    static_configs:
+      - targets: ['ai-service:8000']
+    metrics_path: /metrics
+    scheme: http

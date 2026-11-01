@@ -1,0 +1,40 @@
+---
+description: CivicConnect AI frontend — React patterns, performance, accessibility
+globs: client/**/*
+alwaysApply: false
+---
+
+# Frontend Standards
+
+## Code Quality
+
+- Functional components + custom hooks; no duplicate logic
+- Reuse `client/src/components/ui/` and existing hooks (`useIssuesFeed`, `useDebounce`, `useInfiniteScroll`)
+- Meaningful folder structure; consistent naming; comment only non-obvious business logic
+- Type-safe patterns where possible (JSDoc or TS if migrating)
+
+## Performance
+
+Lazy loading, route splitting, code splitting, memoization (`React.memo`, `useMemo`, `useCallback`), image optimization, React Query caching, optimistic updates for support/comment actions.
+
+## Accessibility
+
+Keyboard navigation, ARIA labels, screen reader support, WCAG-compliant contrast using design tokens, focus-visible states on interactive elements.
+
+## State & Data
+
+- React Query for server state; Zustand for client UI state (theme, filters)
+- Socket.IO via `SocketContext` — invalidate or patch cache on events
+- React Hook Form for report/admin forms; React Hot Toast for feedback
+
+## API Layer
+
+Extend `client/src/services/` and `client/src/api/` — never duplicate fetch logic in components.
+
+```jsx
+// ✅ Data in hook, UI in component
+const { issues, fetchNextPage, isLoading } = useIssuesFeed(filters);
+
+// ❌ Raw fetch in JSX
+useEffect(() => { fetch('/api/issues').then(...) }, []);
+```

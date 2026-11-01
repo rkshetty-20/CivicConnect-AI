@@ -1,0 +1,42 @@
+---
+description: CivicConnect AI phased delivery plan and completion criteria
+alwaysApply: true
+---
+
+# Phased Delivery Plan
+
+Work one phase at a time. Audit current state before implementing. Never skip ahead with half-finished prior phases.
+
+## Phase 1 — Architecture Audit
+
+Map routes, models, controllers, services, env vars, and broken/missing integrations. Document gaps vs spec. No feature work until audit is done.
+
+## Phase 2 — Design System
+
+Inter font, color tokens, shared UI in `client/src/components/ui/`, layout shells (FeedLayout, sidebars, bottom nav). Remove gradient/glassmorphism anti-patterns.
+
+## Phase 3 — Community Feed
+
+Default landing = community feed. Infinite scroll + skeleton loading + pagination fallback. Report card, issue posts, right insights sidebar, real-time prepend on new issues.
+
+## Phase 4 — Reporting + AI
+
+Anonymous report flow: photo/camera, location, category, AI analysis, complaint ID, track complaint. Citizen AI summary; admin AI diagnostics.
+
+## Phase 5 — Admin Dashboard
+
+JWT auth, analytics, issue queue, AI review, department assignment, status updates, resolution upload (before/after), performance metrics.
+
+## Phase 6 — Real-Time
+
+Socket.IO for status updates, support counts, comments, notifications, live admin changes. Optimistic UI where safe.
+
+## Phase 7 — Testing + Deployment
+
+`npm install`, start all services, verify MongoDB/APIs/OpenAI/Cloudinary/Maps/Socket.IO, run build, fix all errors, validate citizen + admin flows end-to-end.
+
+## Validation Flows
+
+**Citizen:** Home → Feed → View Issue → Support → Comment → Report → Upload → Location → AI → Submit → Complaint ID → Track
+
+**Admin:** Login → Dashboard → Review AI → Assign → Update Status → Upload Resolution → Resolved → Citizen live update

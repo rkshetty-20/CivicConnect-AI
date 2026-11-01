@@ -1,0 +1,35 @@
+---
+description: CivicConnect AI testing, validation, and run verification
+alwaysApply: true
+---
+
+# Testing & Validation
+
+After implementation, verify automatically — do not mark work complete without running checks.
+
+## Run Sequence
+
+1. `npm install` in `client/`, `server/`, `ai-service/` (if changed)
+2. Verify dependencies and env vars exist (`.env.example` as reference)
+3. Start MongoDB, backend (`server/`), AI service (`ai-service/`), frontend (`client/`)
+4. Verify API routes respond; OpenAI/Cloudinary/Maps/Socket.IO integrations work or degrade gracefully
+5. `npm run build` in client — fix compile, lint, import errors
+6. Retry until successful
+
+## Integration Checklist
+
+- [ ] MongoDB connection
+- [ ] Issue CRUD + complaint ID generation
+- [ ] AI classification (or fallback)
+- [ ] Cloudinary image upload
+- [ ] Maps geolocation/pins
+- [ ] Socket.IO real-time events
+- [ ] Admin JWT login + protected routes
+
+## Error Policy
+
+Fix compile errors, lint errors, runtime errors, broken routes, missing dependencies, and major console/API failures before stopping. Preserve existing APIs — improve UI without breaking business logic.
+
+## URLs to Report on Completion
+
+Frontend URL, backend URL, admin URL, and any service ports used during verification.

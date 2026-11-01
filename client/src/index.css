@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #2563eb;
+  --color-success: #16a34a;
+  --color-warning: #f59e0b;
+  --color-critical: #dc2626;
+  --bg-page: #f8fafc;
+  --bg-card: #ffffff;
+  --border-default: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  font-family: Inter, system-ui, sans-serif;
+  line-height: 1.5;
+  min-width: 320px;
+  min-height: 100vh;
+  color: var(--text-primary);
+  background-color: var(--bg-page);
+}
+
+[data-theme='dark'] {
+  --bg-page: #0f172a;
+  --bg-card: #1e293b;
+  --border-default: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+}
+
+@layer base {
+  body {
+    @apply bg-surface-muted text-ink antialiased;
+  }
+
+  [data-theme='dark'] body {
+    @apply bg-slate-900 text-slate-100;
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+/* ------------------------------------------------------------------
+   App-wide light-theme override
+   Several pages/components were authored dark-first using hardcoded
+   `slate-9xx` surfaces with light `slate-1xx/2xx/3xx/4xx` text. This
+   block remaps those legacy dark tokens to the light design system
+   WITHOUT touching intentional accents (colored buttons keep their
+   text-white, dark text on bright buttons keeps text-slate-950).
+   Substring attribute selectors also catch opacity/hover variants
+   (e.g. `bg-slate-900/60`, `hover:bg-slate-800`). Fully reversible:
+   delete this block to restore the original dark surfaces.
+   ------------------------------------------------------------------ */
+
+/* Surfaces: dark -> light */
+[class*="bg-slate-950"] { background-color: #ffffff !important; }
+[class*="bg-slate-900"] { background-color: #f8fafc !important; }
+[class*="bg-slate-800"] { background-color: #eef2f6 !important; }
+[class*="bg-slate-700"] { background-color: #e2e8f0 !important; }
+/* Keep translucent dark SCRIMS/OVERLAYS (modal backdrops, map click-veil) dark
+   so they still dim the content beneath them. Only the opacity variants
+   (slash syntax) are affected; solid page surfaces stay white. */
+[class*="bg-slate-950/"] { background-color: rgba(2, 6, 23, 0.55) !important; }
+
+/* Borders / dividers: dark -> light */
+[class*="border-slate-900"],
+[class*="border-slate-800"],
+[class*="border-slate-700"],
+[class*="border-slate-600"] { border-color: #e2e8f0 !important; }
+[class*="divide-slate-"] > * + * { border-color: #e2e8f0 !important; }
+
+/* Text: light-on-dark -> dark-on-light (body + muted labels) */
+[class*="text-slate-100"] { color: #0f172a !important; }
+[class*="text-slate-200"] { color: #1e293b !important; }
+[class*="text-slate-300"] { color: #334155 !important; }
+[class*="text-slate-400"] { color: #475569 !important; }
+
+/* Placeholders */
+[class*="placeholder-slate-"]::placeholder { color: #94a3b8 !important; }
+
+/* Accent text: the light -300/-400 shades were chosen for dark backgrounds and
+   are too faint on white. Push them to strong -700 tones. Safe because every
+   accent-300/400 label now sits on a white/tinted surface (saturated buttons
+   use text-white, which is intentionally not touched here). */
+[class*="text-teal-300"],
+[class*="text-teal-400"] { color: #0f766e !important; }
+[class*="text-emerald-300"],
+[class*="text-emerald-400"],
+[class*="text-green-300"],
+[class*="text-green-400"] { color: #047857 !important; }
+[class*="text-amber-300"],
+[class*="text-amber-400"] { color: #b45309 !important; }
+[class*="text-orange-300"],
+[class*="text-orange-400"] { color: #c2410c !important; }
+[class*="text-rose-300"],
+[class*="text-rose-400"],
+[class*="text-red-300"],
+[class*="text-red-400"] { color: #be123c !important; }
+[class*="text-sky-300"],
+[class*="text-sky-400"] { color: #0369a1 !important; }
+[class*="text-blue-300"],
+[class*="text-blue-400"] { color: #1d4ed8 !important; }
+[class*="text-indigo-300"],
+[class*="text-indigo-400"] { color: #4338ca !important; }
+
+/* Leaflet maps should sit on a light surface to match the theme */
+.leaflet-container { background: #ffffff !important; }
